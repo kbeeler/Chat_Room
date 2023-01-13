@@ -12,18 +12,46 @@
       margin:10;
       display: flex;
       justify-content: center;
-      background-color: lightgray;
+     
     }
 
     .yourDiv {
     background-color: green;
     color: white;
-    align-items: left;
-    text-align: left;
+    /* align-items: left;
+    text-align: left; */
+    width:35%;
+    border-radius: 30px;
     }
     .myDiv {
     background-color: blue;
     color: white;
+    width:35%;
+    border-radius: 30px;
+    }
+
+    #message-container {
+      width: 80%;
+      max-width: 1200px;
+      text-align: center;
+    }
+
+    #message-container ul {
+      background-color: #ccc;
+      padding: 5px;
+    }
+
+    message-container ul:nth-child(2n) {
+      background-color: #fff;
+    }
+
+    #m {
+      width: 70%;
+      Border-radius: 30px;
+    }
+
+    ul {
+      list-style-type: none;
     }
 
     </style>
@@ -31,12 +59,17 @@
 
 <!-- client Side -->
 <body>
+  <div id="message-container">
+    <ul id="messages"></ul>
   <form>
-    <input placeholder="typeMsg" type="text" id="m" />
-    <input type="submit" id="submitButton" value="submit" />
+    <input placeholder="Text Message" type="text" id="m" />
+    <button type="submit" id="submitButton" value="submit">Send</button>
   </form>
-  <ul id="messages"></ul>
+</div>
 </body>
+
+
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script
