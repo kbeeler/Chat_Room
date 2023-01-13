@@ -1,0 +1,21 @@
+.myDiv {
+    background-color: blue;
+    color: white;
+}
+
+.me {
+    color:red;
+
+}
+
+.yourDiv {
+    background-color: green;
+    color: white;
+}
+
+body {
+    background-color: lightgray;
+}
+div {
+    color:yellow;
+}
