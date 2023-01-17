@@ -1,157 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Chat App</title>
 
-  <style>
-    body {
-      padding: 10;
-      margin:10;
-      display: flex;
-      justify-content: center;
-     
-    }
+    <style>
+      body {
+        padding: 10;
+        margin: 10;
+        display: flex;
+        justify-content: center;
+      }
 
-    .yourDiv {
-    background-color: green;
-    color: white;
-    /* align-items: left;
-    text-align: left; */
-    width:35%;
-    border-radius: 30px;
-    }
-    .myDiv {
-    background-color: blue;
-    color: white;
-    width:35%;
-    border-radius: 30px;
-    }
+      .yourDiv {
+        background-color: rgb(0, 204, 0);
+        color: white;
+        width: 35%;
+        border-radius: 30px;
+        text-align: left;
+        padding: 5px;
+      }
+      .myDiv {
+        background-color: rgb(0, 128, 255);
+        color: white;
+        width: 35%;
+        border-radius: 30px;
+        display: inline-block;
+        margin-top: 5px;
+        text-align: left;
+        padding: 5px;
+      }
 
-    #message-container {
-      width: 80%;
-      max-width: 1200px;
-      text-align: center;
-    }
+      #message-container {
+        width: 65%;
+        max-width: 800%;
+        text-align: center;
+        margin-top: 5%;
+      }
 
-    #message-container ul {
-      background-color: #ccc;
-      padding: 5px;
-    }
+      #message-container ul {
+        background-color: rgba(220, 220, 220, 0.405);
+        padding: 7px;
+        border-radius: 30px;
+      }
 
-    message-container ul:nth-child(2n) {
-      background-color: #fff;
-    }
+      message-container ul:nth-child(2n) {
+        background-color: #fff;
+      }
 
-    #m {
-      width: 70%;
-      Border-radius: 30px;
-    }
+      #m {
+        width: 70%;
+        border-radius: 15px;
+      }
 
-    ul {
-      list-style-type: none;
-    }
+      ul {
+        list-style-type: none;
+      }
 
+      /* Style the navbar */
+      #navbar {
+        overflow: hidden;
+        background-color: #333;
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      /* Navbar links */
+      #navbar a {
+        float: left;
+        display: block;
+        color: #bababa;
+        text-align: center;
+        padding: 14px;
+        text-decoration: none;
+      }
+
+      /* Page content */
+      .content {
+        padding: 16px;
+      }
+
+      /* The sticky class is added to the navbar with JS when it reaches its scroll position */
+      .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%;
+      }
+
+      /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+      .sticky + .content {
+        padding-top: 60px;
+      }
     </style>
   </head>
 
-<!-- client Side -->
-<body>
-  <div id="message-container">
-    <ul id="messages"></ul>
-  <form>
-    <input placeholder="Text Message" type="text" id="m" />
-    <button type="submit" id="submitButton" value="submit">Send</button>
-  </form>
-</div>
-</body>
+  <!-- client Side -->
 
+  <div id="navbar">
+    <a href="#home">Home</a>
+    <a href="#news">News</a>
+    <a href="#contact">Contact</a>
+  </div>
 
+  <body>
+    <div id="message-container">
+      <ul id="messages"></ul>
+      <form>
+        <input placeholder="Text Message" type="text" id="m" />
+        <button type="submit" id="submitButton" value="submit">Send</button>
+      </form>
+    </div>
+  </body>
 
+  <script src="/socket.io/socket.io.js"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.5.1.js"
+    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
 
-<script src="/socket.io/socket.io.js"></script>
-<script
-  src="https://code.jquery.com/jquery-3.5.1.js"
-  integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-  crossorigin="anonymous"
-></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+  <script>
+    let userName = prompt("whats your name");
+    let room = prompt("room name");
+    let ID = "";
+    var socket = io();
 
-<script>
-  let userName = prompt("whats your name");
-  let room = prompt("room name");
-  let ID = "";
-  var socket = io();
+    //Emitting the ‘join room’ event from the client-side code
+    socket.emit("join room", { username: userName, roomName: room });
 
-  //Emitting the ‘join room’ event from the client-side code
-  socket.emit("join room", { username: userName, roomName: room });
-
-  socket.on("send data", (data) => {
-    ID = data.id;
-    console.log(" my ID:" + ID);
-  });
-
-
-
-  document.getElementById("m").focus();
-  //when form is submitted, capture the input value and then send it to server
-  document
-    .getElementsByTagName("form")[0]
-    .addEventListener("submit", function (event) {
-      event.preventDefault();
-      //here is the emit for what the user types in on the browser.
-      socket.emit("chat message", {
-        value: document.getElementById("m").value,
-        user: userName,
-      });
-      //clears the msg after you type it
-      document.getElementById("m").value = "";
+    socket.on("send data", (data) => {
+      ID = data.id;
+      console.log(" my ID:" + ID);
     });
 
-  socket.on("chat message", (data) => {
-    console.log("full data returned:", data);
-    console.log("data specified:", data.data.user + ": " + data.id);
-    displayMessage(data);
-  });
+    document.getElementById("m").focus();
+    //when form is submitted, capture the input value and then send it to server
+    document
+      .getElementsByTagName("form")[0]
+      .addEventListener("submit", function (event) {
+        event.preventDefault();
+        //here is the emit for what the user types in on the browser.
+        socket.emit("chat message", {
+          value: document.getElementById("m").value,
+          user: userName,
+        });
+        //clears the msg after you type it
+        document.getElementById("m").value = "";
+      });
 
-  function displayMessage(data) {
-    //this is the same data passed in above
-    let authorClass = "";
-    let divClass = "";
-    //verify that the user ID and the message sent ID is similar
-    if (data.id === ID) {
-      console.log("This person has sent a message");
-      authorClass = "me";
-      divClass = "myDiv";
-    } else {
-      authorClass = "you";
-      divClass = "yourDiv";
-      console.log("that other person send a msg")
+    socket.on("chat message", (data) => {
+      console.log("full data returned:", data);
+      console.log("data specified:", data.data.user + ": " + data.id);
+      displayMessage(data);
+    });
+
+    function displayMessage(data) {
+      //this is the same data passed in above
+      let authorClass = "";
+      let divClass = "";
+      //verify that the user ID and the message sent ID is similar
+      if (data.id === ID) {
+        console.log("This person has sent a message");
+        authorClass = "me";
+        divClass = "myDiv";
+      } else {
+        authorClass = "you";
+        divClass = "yourDiv";
+        console.log("that other person send a msg");
+      }
+
+      const div = document.createElement("div");
+      div.className = divClass;
+
+      const li = document.createElement("li");
+      const p = document.createElement("p");
+
+      p.className = "time";
+      p.innerText = moment().format("hh:mm");
+
+      div.innerHTML =
+        '<p class="' +
+        authorClass +
+        '">' +
+        data.data.user +
+        "</p>" +
+        '<p class="message"> ' +
+        data.data.value +
+        "</p>";
+
+      div.appendChild(p);
+      li.appendChild(div);
+
+      document.getElementById("messages").appendChild(li);
+      //scroll to the bottom
+      window.scrollTo(0, document.body.scrollHeight);
     }
 
-    const div = document.createElement("div");
-    div.className = divClass;
+    //navbar
+    // When the user scrolls the page, execute myFunction
+    window.onscroll = function () {
+      myFunction();
+    };
 
-    const li = document.createElement("li");
-    const p = document.createElement("p");
+    // Get the navbar
+    var navbar = document.getElementById("navbar");
 
-    p.className = "time";
-    p.innerText = moment().format("hh:mm");
-    
-    div.innerHTML =
-      '<p class="' + authorClass + '">' + data.data.user + "</p>" +
-      '<p class="message"> ' + data.data.value + "</p>";
+    // Get the offset position of the navbar
+    var sticky = navbar.offsetTop;
 
-    div.appendChild(p);
-    li.appendChild(div);
-
-    document.getElementById("messages").appendChild(li);
-    //scroll to the bottom
-    window.scrollTo(0, document.body.scrollHeight);
-  }
-
-</script>
-
+    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+    function myFunction() {
+      if (window.pageYOffset >= sticky) {
+        navbar.classList.add("sticky");
+      } else {
+        navbar.classList.remove("sticky");
+      }
+    }
+  </script>
 </html>
