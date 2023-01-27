@@ -4,7 +4,6 @@
   "description": "This app allows you to chat with people in the same room as you. Built in Node.js",
   "main": "main.js",
   "scripts": {
-    
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -16,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/kbeeler/Chat_Room/issues"
   },
-  "homepage": "https://github.com/kbeeler/Chat_Room#readme"
+  "homepage": "https://github.com/kbeeler/Chat_Room#readme",
+  "dependencies": {
+    "bootstrap": "^5.2.3"
+  }
 }

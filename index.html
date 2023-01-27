@@ -1,54 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
+    <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Chat App</title>
-
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
     <style>
       body {
-        padding: 10;
-        margin: 10;
+        padding: 10px;
+        margin: 10px;
         display: flex;
         justify-content: center;
       }
 
       .yourDiv {
-        background-color: rgb(0, 204, 0);
+        background-color: rgb(18, 178, 0);
         color: white;
         width: 35%;
-        border-radius: 30px;
+        border-radius: 15px;
         text-align: left;
         padding: 5px;
       }
       .myDiv {
-        background-color: rgb(0, 128, 255);
+        background-color: rgb(0, 149, 255);
         color: white;
         width: 35%;
-        border-radius: 30px;
+        border-radius: 15px;
         display: inline-block;
         margin-top: 5px;
         text-align: left;
-        padding: 5px;
+        padding: 7px;
       }
-
-      #message-container {
+      .container-fluid {
         width: 65%;
         max-width: 800%;
         text-align: center;
-        margin-top: 5%;
+        margin-top: 7%;
+      }
+
+      .container-fluid ul {
+        background-color: rgba(220, 220, 220, 0.405);
+        padding: 7px;
+        border-radius: 20px;
+      }
+
+       message-container ul:nth-child(2n) {
+        background-color: #fff;
+      }
+
+      /* #message-container {
+        width: 65%;
+        max-width: 800%;
+        text-align: center;
+        margin-top: 7%;
       }
 
       #message-container ul {
         background-color: rgba(220, 220, 220, 0.405);
         padding: 7px;
-        border-radius: 30px;
+        border-radius: 20px;
       }
 
       message-container ul:nth-child(2n) {
         background-color: #fff;
-      }
+      } */
 
       #m {
         width: 70%;
@@ -59,166 +79,231 @@
         list-style-type: none;
       }
 
-      /* Style the navbar */
-      #navbar {
-        overflow: hidden;
-        background-color: #333;
-        position: fixed;
-        top: 0;
-        width: 100%;
+      /* Page content */
+      .content {
+        padding: 16px;
       }
 
-      /* Navbar links */
-      #navbar a {
+      li {
+        margin-top: 1%;
+      }
+
+      .me {
+        color: rgb(204, 204, 204);
+        font-size: 9px;
+      }
+
+      .you {
+        color: rgb(204, 204, 204);
+        font-size: 8px;
+      }
+      .time {
+        color: rgb(204, 204, 204);
+        font-size: 8px;
+        text-align: right;
+      }
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+      .submitButton button {
+        font-size:10px;
+      }
+
         float: left;
         display: block;
         color: #bababa;
         text-align: center;
         padding: 14px;
         text-decoration: none;
-      }
-
-      /* Page content */
-      .content {
-        padding: 16px;
-      }
-
-      /* The sticky class is added to the navbar with JS when it reaches its scroll position */
-      .sticky {
-        position: fixed;
-        top: 0;
-        width: 100%;
-      }
-
-      /* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-      .sticky + .content {
-        padding-top: 60px;
-      }
+      } */
     </style>
   </head>
 
   <!-- client Side -->
 
-  <div id="navbar">
-    <a href="#home">Home</a>
-    <a href="#news">News</a>
-    <a href="#contact">Contact</a>
-  </div>
-
   <body>
-    <div id="message-container">
+    <nav class="navbar bg-light fixed-top">
+      <!-- <div class="container-fluid"> -->
+        <i class="fa-solid fa-message-bot">Chat Room</i>
+        <!-- <form class="d-flex mt-3" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form> -->
+
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar"
+          aria-controls="offcanvasNavbar"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div
+          class="offcanvas offcanvas-end"
+          tabindex="-1"
+          id="offcanvasNavbar"
+          aria-labelledby="offcanvasNavbarLabel"
+        >
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+              Place Holder
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Place Holder</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Place Holder</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Dropdown Place Holder
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li>
+                    <hr class="dropdown-divider" />
+                  </li>
+                  <li>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- <div id="message-container"> -->
+      <div class="container-fluid">
+  
       <ul id="messages"></ul>
       <form>
         <input placeholder="Text Message" type="text" id="m" />
-        <button type="submit" id="submitButton" value="submit">Send</button>
+        <button
+          type="submit"
+          id="submitButton"
+          class="btn btn-secondary"
+          value="submit"
+        >
+          Send
+        </button>
+        <!-- <img src="assets/images/chaticon.jpeg" class="img-fluid" alt="i" width="30" height="24"> -->
       </form>
     </div>
-  </body>
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script
-    src="https://code.jquery.com/jquery-3.5.1.js"
-    integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
-    crossorigin="anonymous"
-  ></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
 
-  <script>
-    let userName = prompt("whats your name");
-    let room = prompt("room name");
-    let ID = "";
-    var socket = io();
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script
+      src="https://kit.fontawesome.com/92516bb543.js"
+      crossorigin="anonymous"
+    ></script>
 
-    //Emitting the ‘join room’ event from the client-side code
-    socket.emit("join room", { username: userName, roomName: room });
+    <script>
+      let userName = prompt("whats your name");
+      let room = prompt("room name");
+      let ID = "";
+      var socket = io();
 
-    socket.on("send data", (data) => {
-      ID = data.id;
-      console.log(" my ID:" + ID);
-    });
+      //Emitting the ‘join room’ event from the client-side code
+      socket.emit("join room", { username: userName, roomName: room });
 
-    document.getElementById("m").focus();
-    //when form is submitted, capture the input value and then send it to server
-    document
-      .getElementsByTagName("form")[0]
-      .addEventListener("submit", function (event) {
-        event.preventDefault();
-        //here is the emit for what the user types in on the browser.
-        socket.emit("chat message", {
-          value: document.getElementById("m").value,
-          user: userName,
-        });
-        //clears the msg after you type it
-        document.getElementById("m").value = "";
+      socket.on("send data", (data) => {
+        ID = data.id;
+        console.log(" my ID:" + ID);
       });
 
-    socket.on("chat message", (data) => {
-      console.log("full data returned:", data);
-      console.log("data specified:", data.data.user + ": " + data.id);
-      displayMessage(data);
-    });
+      document.getElementById("m").focus();
+      //when form is submitted, capture the input value and then send it to server
+      document
+        .getElementsByTagName("form")[0]
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          //here is the emit for what the user types in on the browser.
+          socket.emit("chat message", {
+            value: document.getElementById("m").value,
+            user: userName,
+          });
+          //clears the msg after you type it
+          document.getElementById("m").value = "";
+        });
 
-    function displayMessage(data) {
-      //this is the same data passed in above
-      let authorClass = "";
-      let divClass = "";
-      //verify that the user ID and the message sent ID is similar
-      if (data.id === ID) {
-        console.log("This person has sent a message");
-        authorClass = "me";
-        divClass = "myDiv";
-      } else {
-        authorClass = "you";
-        divClass = "yourDiv";
-        console.log("that other person send a msg");
+      socket.on("chat message", (data) => {
+        console.log("full data returned:", data);
+        console.log("data specified:", data.data.user + ": " + data.id);
+        displayMessage(data);
+      });
+
+      function displayMessage(data) {
+        //this is the same data passed in above
+        let authorClass = "";
+        let divClass = "";
+        //verify that the user ID and the message sent ID is similar
+        if (data.id === ID) {
+          console.log("This person has sent a message");
+          authorClass = "me";
+          divClass = "myDiv";
+        } else {
+          authorClass = "you";
+          divClass = "yourDiv";
+          console.log("that other person send a msg");
+        }
+
+        const div = document.createElement("div");
+        div.className = divClass;
+
+        const li = document.createElement("li");
+        const p = document.createElement("p");
+
+        p.className = "time";
+        p.innerText = moment().format("hh:mm");
+
+        div.innerHTML =
+          '<p class="' +
+          authorClass +
+          '">' +
+          data.data.user +
+          "</p>" +
+          '<p class="message"> ' +
+          data.data.value +
+          "</p>";
+
+        div.appendChild(p);
+        li.appendChild(div);
+
+        document.getElementById("messages").appendChild(li);
+        //scroll to the bottom
+        window.scrollTo(0, document.body.scrollHeight);
       }
 
-      const div = document.createElement("div");
-      div.className = divClass;
-
-      const li = document.createElement("li");
-      const p = document.createElement("p");
-
-      p.className = "time";
-      p.innerText = moment().format("hh:mm");
-
-      div.innerHTML =
-        '<p class="' +
-        authorClass +
-        '">' +
-        data.data.user +
-        "</p>" +
-        '<p class="message"> ' +
-        data.data.value +
-        "</p>";
-
-      div.appendChild(p);
-      li.appendChild(div);
-
-      document.getElementById("messages").appendChild(li);
-      //scroll to the bottom
-      window.scrollTo(0, document.body.scrollHeight);
-    }
-
-    //navbar
-    // When the user scrolls the page, execute myFunction
-    window.onscroll = function () {
-      myFunction();
-    };
-
-    // Get the navbar
-    var navbar = document.getElementById("navbar");
-
-    // Get the offset position of the navbar
-    var sticky = navbar.offsetTop;
-
-    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky");
-      } else {
-        navbar.classList.remove("sticky");
-      }
-    }
-  </script>
+    </script>
+  </body>
 </html>
